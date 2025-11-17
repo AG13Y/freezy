@@ -1,0 +1,29 @@
+/*
+	Installed from https://ui.angular-material.dev/api/registry/
+	Update this file using `@ngm-dev/cli update free-multi-column/full-width-three-column`
+*/
+
+@use '@angular/material' as mat;
+
+.custom-avatar-button {
+  @include mat.icon-button-overrides(
+    (
+      icon-size: 36px,
+    )
+  );
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row{
+    padding: 0;
+}
+
+.mat-mdc-list-item.mat-list-item-active {
+  color: var(--mat-sys-primary) !important;
+
+  .mat-icon {
+    color: var(--mat-sys-primary) !important;
+    font-variation-settings: 'FILL' 1; // Faz o ícone ficar preenchido
+  }
+}
+
+

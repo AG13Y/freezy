@@ -1,0 +1,72 @@
+<h2 mat-dialog-title class="dark:text-white">{{ modalTitle }}</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="projectForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    
+    <div class="space-y-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Título do Projeto</mat-label>
+        <input matInput formControlName="titulo" placeholder="Ex: E-commerce com Angular">
+        @if (projectForm.get('titulo')?.hasError('required')) {
+          <mat-error>O título é obrigatório.</mat-error>
+        }
+        @if (projectForm.get('titulo')?.hasError('minlength')) {
+          <mat-error>O título precisa de pelo menos 5 caracteres.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Descrição Completa</mat-label>
+        <textarea matInput formControlName="descricao" rows="8" 
+                  placeholder="Descreva o escopo, entregáveis e requisitos..."></textarea>
+        @if (projectForm.get('descricao')?.hasError('required')) {
+          <mat-error>A descrição é obrigatória.</mat-error>
+        }
+        @if (projectForm.get('descricao')?.hasError('minlength')) {
+          <mat-error>A descrição precisa de pelo menos 20 caracteres.</mat-error>
+        }
+      </mat-form-field>
+    </div>
+
+    <div class="space-y-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Orçamento (R$)</mat-label>
+        <input matInput type="number" formControlName="orcamento" placeholder="Ex: 5000">
+        @if (projectForm.get('orcamento')?.hasError('required')) {
+          <mat-error>O orçamento é obrigatório.</mat-error>
+        }
+        @if (projectForm.get('orcamento')?.hasError('min')) {
+          <mat-error>O valor deve ser positivo.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Habilidades (separadas por vírgula)</mat-label>
+        <input matInput formControlName="habilidades" placeholder="Ex: Angular, TypeScript, Figma">
+         @if (projectForm.get('habilidades')?.hasError('required')) {
+          <mat-error>Pelo menos uma habilidade é obrigatória.</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Prazo Final (Opcional)</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="prazoFinal" [min]="minDate">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="pt-4">
+  <button mat-button (click)="close()">Cancelar</button>
+  <button mat-flat-button color="primary" [disabled]="projectForm.invalid" (click)="onSubmit()">
+    @if (isEditMode) {
+      Salvar Alterações
+    } @else {
+      Publicar Projeto
+    }
+  </button>
+</mat-dialog-actions>
