@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { NextLogin } from './components/next-login/next-login';
 import { SignPag } from './components/sign-pag/sign-pag';
 import { RegisterPag } from './components/register-pag/register-pag';
-import { Termos } from './components/termos/termos';
+import { Termos } from './modals/termos/termos';
 import { authGuard } from './guards/auth.guard';
 import { publicGuard } from './guards/public.guard';
 import { ProjectList } from './components/project-list/project-list';

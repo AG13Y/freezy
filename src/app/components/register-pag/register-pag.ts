@@ -2,10 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
+import { Termos } from '../../modals/termos/termos';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-register-pag',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, MatDialogModule],
   templateUrl: './register-pag.html',
   styleUrl: './register-pag.scss',
 })
@@ -13,9 +15,20 @@ export class RegisterPag {
  private fb = inject(FormBuilder);
   private authService = inject(AuthService);
   registerForm: FormGroup;
+  private dialog = inject(MatDialog);
   
   // Nova propriedade para feedback de erro
   registerError: string | null = null;
+
+  openTermosModal(): void {
+    // Abre o componente 'Termos' como um modal
+    this.dialog.open(Termos, {
+      width: '800px',
+      maxWidth: '90vw',
+      maxHeight: '80vh',
+      autoFocus: false // Impede o foco automático
+    });
+  }
 
   constructor() {
     // Este é o FormGroup completo com todos os campos
