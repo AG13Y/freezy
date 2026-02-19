@@ -34,49 +34,37 @@ interface ChatModalData {
 export class Chat {
   @ViewChild('messageContainer') private messageContainer!: ElementRef;
 
-  // Injeções
   private chatService = inject(ChatService);
   private snackBar = inject(MatSnackBar);
   private dialogRef = inject(MatDialogRef<ChatModel>);
   public data: ChatModalData = inject(MAT_DIALOG_DATA);
 
-  // Propriedades
   public targetUser = this.data.targetUser;
   public currentUser = this.data.currentUser;
   public chat = signal<ChatModel | null>(null);
   public messageControl = new FormControl('', { nonNullable: true, validators: [Validators.required] });
-  
-  // 2. Removemos 'chatSubscription' e 'needsScroll'
 
   onCallClick(): void {
-    // Por enquanto, apenas avisamos o usuário que a função não está pronta
+
     this.snackBar.open('Funcionalidade de chamada ainda não implementada.', 'Fechar', { 
       duration: 3000 
     });
   }
   
   ngOnInit(): void {
-    // 3. O 'ngOnInit' agora SÓ busca o chat.
     this.chatService.getOrCreateChat(this.currentUser.id, this.targetUser.id).subscribe({
       next: (chat) => {
         this.chat.set(chat);
-        // Não iniciamos mais o 'poll'
       },
       error: (err) => this.showError('Erro ao iniciar chat.')
     });
   }
 
-  // 4. Usamos AfterViewInit para rolar para baixo UMA VEZ após o chat carregar
   ngAfterViewInit(): void {
     this.scrollToBottom();
   }
 
-  /**
-   * 5. O novo sendMessage (Pessimista)
-   * Não há mais "atualização otimista".
-   */
   sendMessage(): void {
-    // Validação
     if (this.messageControl.invalid) return;
     const currentChat = this.chat();
     if (!currentChat) return;
@@ -86,24 +74,16 @@ export class Chat {
       this.messageControl.reset();
       return;
     }
-
-    // A. Desabilita o formulário enquanto envia
     this.messageControl.disable();
 
-    // B. Chama o serviço
     this.chatService.sendMessage(currentChat.id, messageText, this.currentUser.id).subscribe({
       next: (chatFromServer) => {
-        // C. SUCESSO: O servidor salvou.
-        //    Atualizamos o signal com o chat que o servidor retornou.
         this.chat.set(chatFromServer);
-        
-        // D. Limpa o form, reabilita e rola para baixo
         this.messageControl.reset();
         this.messageControl.enable();
-        this.scrollToBottom(); // Rola para a nova mensagem
+        this.scrollToBottom(); 
       },
       error: (err) => {
-        // E. ERRO: Apenas mostramos o erro e reabilitamos o form.
         this.showError('Erro ao enviar mensagem.');
         this.messageControl.enable();
       }
@@ -111,7 +91,6 @@ export class Chat {
   }
 
   private scrollToBottom(): void {
-    // Usamos um setTimeout para garantir que o DOM foi atualizado
     setTimeout(() => {
       try {
         this.messageContainer.nativeElement.scrollTop = this.messageContainer.nativeElement.scrollHeight;

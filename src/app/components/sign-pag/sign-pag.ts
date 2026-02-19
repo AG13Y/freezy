@@ -37,8 +37,6 @@ export class SignPag {
         console.log('Login bem-sucedido:', user.nome);
       },
       error: (err) => {
-        // --- CORREÇÃO AQUI ---
-        // Agora pegamos a mensagem de erro específica vinda do serviço
         this.loginError = err.message; 
         console.error(err);
       }

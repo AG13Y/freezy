@@ -16,20 +16,14 @@ import { Reports } from './components/reports/reports';
 export const routes: Routes = [
     {path: '', redirectTo: 'sign-pag', pathMatch: 'full'},
     
-    // 2. ATUALIZAR a rota 'next-login' para ter rotas-filhas
     {
       path: 'next-login', 
       component: NextLogin,
       canActivate: [authGuard],
-      // 3. Adicionar o array 'children'
       children: [
-        // 2. CORREÇÃO: Mudar o redirect de 'projects' para 'dashboard'
         { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
-        
-        // 3. Adicionar a nova rota
         { path: 'dashboard', component: Dashboard },
-        
-        // A rota de projetos continua aqui, mas não é mais o padrão
+
         { path: 'projects', component: ProjectList },
         { path: 'calendar', component: Calendar },
         { path: 'documents', component: Documents },

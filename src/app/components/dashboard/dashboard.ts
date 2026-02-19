@@ -17,6 +17,5 @@ import { RouterModule } from '@angular/router';
 export class Dashboard {
   private authService = inject(AuthService);
 
-  // Vamos pegar o nome do usuário logado para dar boas-vindas
   public userName = computed(() => this.authService.currentUser()?.nome || 'Usuário');
 }

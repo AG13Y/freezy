@@ -14,7 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes), 
     
-    // 2. Adicione o provider aqui
     provideHttpClient(),
     provideNativeDateAdapter(),
    

@@ -1,7 +1,4 @@
-/*
-	Installed from https://ui.angular-material.dev/api/registry/
-	Update this file using `@ngm-dev/cli update free-stacked-lists/simple`
-*/
+
 
 import { Component } from '@angular/core';
 import { MatListModule } from '@angular/material/list';

@@ -22,9 +22,8 @@ export class ChatConfirm {
   public currentUser = this.authService.currentUser();
 
   startChat(): void {
-      if (!this.currentUser) return; // Checagem de segurança
-  
-      // Abre o novo modal de chat
+      if (!this.currentUser) return;
+
       this.dialog.open(Chat, {
         width: '500px',
         maxWidth: '90vw',
@@ -33,8 +32,6 @@ export class ChatConfirm {
           currentUser: this.currentUser
         }
       });
-  
-      // Fecha o modal de detalhes do usuário
       this.close();
     }
 

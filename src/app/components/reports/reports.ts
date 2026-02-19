@@ -29,19 +29,17 @@ export interface EnrichedReview {
   styleUrl: './reports.scss',
 })
 export class Reports {
-  // Injeções
+
   private reviewService = inject(ReviewService);
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private projectService = inject(ProjectService);
   private snackBar = inject(MatSnackBar);
 
-  // Signals
   public isLoading = signal(true);
   public reviews = signal<EnrichedReview[]>([]);
   private currentUser = this.authService.currentUser()!;
 
-  // Signals Computados para as Estatísticas
   public totalReviews = computed(() => this.reviews().length);
   public averageRating = computed(() => {
     const reviews = this.reviews();
@@ -58,7 +56,6 @@ export class Reports {
   async loadEnrichedReviews(): Promise<void> {
     this.isLoading.set(true);
     try {
-      // 1. Pega todas as avaliações que o usuário logado RECEBEU
       const rawReviews = await firstValueFrom(
         this.reviewService.getReviewsForUser(this.currentUser.id)
       );
@@ -68,24 +65,21 @@ export class Reports {
         return;
       }
 
-      // 2. "Enriquece" cada avaliação com dados do projeto e do autor
       const enrichedList: EnrichedReview[] = [];
       for (const review of rawReviews) {
-        // Pega os dados de quem escreveu a avaliação
+
         const reviewer$ = this.userService.getUserById(review.reviewerId);
-        // Pega os dados do projeto
+
         const project$ = this.projectService.getProjectById(review.projectId);
 
-        // Aguarda as duas chamadas
         const [reviewer, project] = await Promise.all([
           firstValueFrom(reviewer$),
           firstValueFrom(project$)
         ]);
 
         if (reviewer && project) {
-  review.rating = Number(review.rating || 0); // garante number
+  review.rating = Number(review.rating || 0); 
 
-  // cria array de estrelas (true = preenchida)
   const stars = Array.from({ length: 5 }, (_, idx) => idx < review.rating);
 
   enrichedList.push({ review, reviewer, project, stars });
@@ -94,7 +88,7 @@ export class Reports {
 
       this.reviews.set(enrichedList.sort((a, b) => 
         new Date(b.review.timestamp).getTime() - new Date(a.review.timestamp).getTime()
-      )); // Ordena por mais recente
+      )); 
 
     } catch (err) {
       console.error('Erro ao carregar relatórios:', err);

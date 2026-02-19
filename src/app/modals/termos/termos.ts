@@ -15,12 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './termos.scss',
 })
 export class Termos {
-  // 3. Injetar a referência do Dialog para podermos fechá-lo
   private dialogRef = inject(MatDialogRef<Termos>);
 
-  /**
-   * 4. Criar a função de fechar
-   */
   close(): void {
     this.dialogRef.close();
   }

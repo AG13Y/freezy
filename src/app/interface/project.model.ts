@@ -1,16 +1,16 @@
 export interface Project {
-  id: string; // ID único do projeto
+  id: string; 
   titulo: string;
   descricao: string;
   
-  // Vínculos
-  empresaId: string | number; // ID do User (tipo 'empresa') que postou o projeto
-  freelancerId?: string | number; // ID do User (tipo 'freelancer') que está executando
+
+  empresaId: string | number; 
+  freelancerId?: string | number; 
   
-  // Metadados
+
   status: 'Aberto' | 'Em Andamento' | 'Concluído' | 'Cancelado';
   orcamento: number;
   dataPostagem: Date;
   prazoFinal?: Date;
-  habilidadesNecessarias?: string[]; // Ajuda no "match" com freelancers
+  habilidadesNecessarias?: string[];
 }

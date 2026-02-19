@@ -16,22 +16,19 @@ export class RegisterPag {
   private authService = inject(AuthService);
   registerForm: FormGroup;
   private dialog = inject(MatDialog);
-  
-  // Nova propriedade para feedback de erro
+
   registerError: string | null = null;
 
   openTermosModal(): void {
-    // Abre o componente 'Termos' como um modal
     this.dialog.open(Termos, {
       width: '800px',
       maxWidth: '90vw',
       maxHeight: '80vh',
-      autoFocus: false // Impede o foco automático
+      autoFocus: false 
     });
   }
 
   constructor() {
-    // Este é o FormGroup completo com todos os campos
     this.registerForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['freelancer', [Validators.required]],
@@ -45,7 +42,6 @@ export class RegisterPag {
     });
   }
 
-  // Função para caso o link da imagem quebre
   onImageError() {
     this.registerForm.get('fotoUrl')?.setValue(null);
   }
@@ -66,15 +62,11 @@ export class RegisterPag {
     }
     this.registerError = null;
 
-    // --- CORREÇÃO AQUI ---
-    // Trocamos o try...catch por .subscribe()
     this.authService.register(this.registerForm.value).subscribe({
       next: (user) => {
-        // Sucesso! O 'tap' no serviço já redirecionou.
         console.log('Registro bem-sucedido:', user.nome);
       },
       error: (err) => {
-        // Erro!
         this.registerError = 'Ocorreu um erro ao registrar. Verifique os dados e tente novamente.';
         console.error(err);
       }

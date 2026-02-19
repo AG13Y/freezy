@@ -17,17 +17,15 @@ export interface ConfirmDialogData {
   styleUrl: './confirm-status.scss',
 })
 export class ConfirmStatus {
-  // Recebe os dados (título e mensagem)
   public data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);
   
-  // Referência para fechar o modal
   private dialogRef = inject(MatDialogRef<ConfirmStatus>);
 
   onConfirm(): void {
-    this.dialogRef.close(true); // Retorna 'true' ao confirmar
+    this.dialogRef.close(true);
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); // Retorna 'false' ao cancelar
+    this.dialogRef.close(false); 
   }
 }

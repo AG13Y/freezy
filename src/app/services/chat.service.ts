@@ -10,10 +10,7 @@ import { Chat } from '../modals/chat/chat';
 export class ChatService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/chats';
-/**
-   * 1. Encontra um chat existente ou cria um novo.
-   * (Esta função está perfeita)
-   */
+
   getOrCreateChat(userId1: string | number, userId2: string | number): Observable<ChatModel> {
     return this.http.get<ChatModel[]>(`${this.apiUrl}`).pipe(
       map(chats => 
@@ -23,10 +20,8 @@ export class ChatService {
       ),
       switchMap(chat => {
         if (chat) {
-          // Se encontrou, retorna o chat
           return of(chat);
         } else {
-          // Se não encontrou, cria um novo chat
           const newChat: Omit<ChatModel, 'id'> = {
             participantIds: [userId1, userId2],
             messages: []
@@ -37,13 +32,8 @@ export class ChatService {
     );
   }
 
-  /**
-   * 2. Envia uma nova mensagem.
-   * (Esta função também está ótima)
-   */
   sendMessage(chatId: string, messageText: string, senderId: string | number): Observable<ChatModel> {
     
-    // Busca o chat atual para adicionar a mensagem ao array
     return this.http.get<ChatModel>(`${this.apiUrl}/${chatId}`).pipe(
       switchMap(chat => {
         
@@ -56,8 +46,6 @@ export class ChatService {
 
         const updatedMessages = [...(chat.messages || []), newMessage];
 
-        // Usamos PATCH para atualizar apenas o array de mensagens
-        // e retornamos o chat completo que o servidor nos deu.
         return this.http.patch<ChatModel>(`${this.apiUrl}/${chatId}`, {
           messages: updatedMessages
         });

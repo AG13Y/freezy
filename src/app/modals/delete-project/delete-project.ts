@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 export interface ConfirmDialogData {
   title: string;
   message: string;
-  confirmButtonText?: string;  // Texto do botão (ex: "Confirmar", "Excluir")
+  confirmButtonText?: string;
 }
 
 @Component({
@@ -18,15 +18,14 @@ export interface ConfirmDialogData {
 export class DeleteProject {
   public data = inject<ConfirmDialogData>(MAT_DIALOG_DATA);
   
-  // Referência para fechar o modal
   private dialogRef = inject(MatDialogRef<DeleteProject>);
 
   onConfirm(): void {
-    this.dialogRef.close(true); // Retorna 'true' ao confirmar
+    this.dialogRef.close(true);
   }
 
   onCancel(): void {
-    this.dialogRef.close(false); // Retorna 'false' ao cancelar
+    this.dialogRef.close(false);
   }
 
 }

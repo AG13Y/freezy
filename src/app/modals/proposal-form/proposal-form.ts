@@ -72,7 +72,6 @@ export class ProposalForm implements OnInit{
 
     const formValues = this.proposalForm.value;
 
-    // Montamos o objeto completo da Proposta
     const newProposalData: Omit<Proposal, 'id'> = {
       projetoId: this.project.id,
       freelancerId: this.currentUser.id,
@@ -84,11 +83,9 @@ export class ProposalForm implements OnInit{
       attachedDocuments: formValues.documentos || []
     };
 
-    // Chamamos o serviço de proposta
     this.proposalService.addProposal(newProposalData).subscribe({
       next: (createdProposal) => {
         this.snackBar.open('Proposta enviada com sucesso!', 'OK', { duration: 3000 });
-        // Fecha o modal (não precisamos retornar nada, só fechar)
         this.dialogRef.close(true); 
       },
       error: (err) => {

@@ -24,7 +24,6 @@ export class MeetingForm {
   private meetingService = inject(MeetingService);
   private authService = inject(AuthService);
   
-  // Recebe a DATA (ex: new Date()) que o usuário clicou
   public selectedDate: Date = inject(MAT_DIALOG_DATA);
   
   public meetingForm!: FormGroup;
@@ -49,14 +48,13 @@ export class MeetingForm {
       userId: this.currentUser.id,
       title: formValues.title,
       time: formValues.time,
-      // Formata a data para YYYY-MM-DD
       date: this.selectedDate.toISOString().split('T')[0] 
     };
 
     this.meetingService.addMeeting(newMeeting).subscribe({
       next: (meeting) => {
         this.snackBar.open('Reunião agendada!', 'OK', { duration: 3000 });
-        this.dialogRef.close(meeting); // Retorna a reunião
+        this.dialogRef.close(meeting);
       },
       error: (err) => {
         this.snackBar.open('Erro ao agendar.', 'Fechar', { duration: 3000 });

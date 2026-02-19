@@ -17,7 +17,6 @@ import { MatIconModule } from '@angular/material/icon';
 export class Team {
   private userService = inject(UserService);
   
-  // 4. Injetar o serviço principal de MatDialog
   private dialog = inject(MatDialog);
 
   public users = signal<User[]>([]);
@@ -29,7 +28,6 @@ export class Team {
 
   loadUsers(): void {
     this.isLoading.set(true);
-    // Busca os usuários do seu serviço
     this.userService.getUsers().subscribe({ 
       next: (data) => {
         this.users.set(data);
@@ -42,21 +40,15 @@ export class Team {
     });
   }
 
-  /**
-   * 5. Esta é a função que abre o modal de detalhes
-   */
   openUserDetail(user: User): void {
     this.dialog.open(UserDetail, {
       width: '600px',
       maxWidth: '90vw',
-      data: user, // <-- AQUI passamos o usuário clicado para o modal
+      data: user,
       autoFocus: false
     });
   }
 
-  /**
-   * Helper para buscar a foto (para manter o HTML limpo)
-   */
   getUserPhoto(user: User): string {
     if (user?.fotoUrl) {
       return user.fotoUrl;

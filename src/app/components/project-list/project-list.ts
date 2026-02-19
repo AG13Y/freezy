@@ -21,8 +21,8 @@ import { ReviewForm } from '../../modals/review-form/review-form';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { startWith } from 'rxjs';
-import { MatFormFieldModule } from '@angular/material/form-field'; // Novo
-import { MatInputModule } from '@angular/material/input';     // Novo
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
 
 
 @Component({
@@ -49,7 +49,6 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
 
   private reviewService = inject(ReviewService);
 
-  // 6. Esta é a ÚNICA "fonte da verdade". É um signal gravável.
   public projects = signal<Project[]>([]);
   public projectStatusOptions: Project['status'][] = ['Aberto', 'Em Andamento', 'Concluído', 'Cancelado'];
 
@@ -65,16 +64,14 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     this.searchControl.valueChanges.pipe(startWith(''))
   );
 
-  // Cria um NOVO signal (computado) que filtra a lista de projetos
   public filteredProjects = computed(() => {
     const term = this.searchTerm()?.toLowerCase() || '';
     const allProjects = this.projects(); // Pega a master list
 
     if (!term) {
-      return allProjects; // Sem filtro, retorna tudo
+      return allProjects;
     }
 
-    // Retorna apenas os projetos que dão "match"
     return allProjects.filter(project =>
       project.titulo.toLowerCase().includes(term) ||
       project.descricao.toLowerCase().includes(term) ||
@@ -86,9 +83,6 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     this.loadProjects();
   }
 
-  /**
-   * Busca os projetos da API e define o valor do signal
-   */
   loadProjects(): void {
     this.projectService.getProjects().subscribe(projects => {
       this.projects.set(projects);
@@ -101,13 +95,11 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     const user = this.currentUser();
     if (!user) return;
 
-    // Limpa o mapa para o caso de um recarregamento
     this.reviewsMap.set(new Map()); 
     
     for (const project of projects) {
       if (project.status === 'Concluído') {
         this.reviewService.checkIfReviewExists(project.id, user.id).subscribe(exists => {
-          // Atualiza o mapa. O 'set' vai adicionar ou sobrescrever.
           this.reviewsMap.update(map => map.set(project.id, exists));
         });
       }
@@ -120,16 +112,13 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     const user = this.currentUser();
     if (!user) return;
 
-    // Determina quem está sendo avaliado
     let revieweeId: string | number | undefined;
     let revieweeType: 'empresa' | 'freelancer';
 
     if (user.tipo === 'empresa' && project.freelancerId) {
-      // Empresa está avaliando o freelancer
       revieweeId = project.freelancerId;
       revieweeType = 'freelancer';
     } else if (user.tipo === 'freelancer' && project.freelancerId === user.id) {
-      // Freelancer está avaliando a empresa
       revieweeId = project.empresaId;
       revieweeType = 'empresa';
     } else {
@@ -148,9 +137,7 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // 'result' será a avaliação se foi submetida com sucesso
       if (result) {
-        // Marcamos este projeto como avaliado no nosso mapa
         this.reviewsMap.update(map => map.set(project.id, true));
       }
     });
@@ -179,8 +166,8 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
       data: {
         title: 'Confirmar Exclusão',
         message: `Tem certeza que deseja deletar o projeto "${projectToDelete.titulo}"?`,
-        confirmButtonText: 'Confirmar Exclusão', // Texto específico
-        confirmButtonColor: 'warn' // Cor vermelha
+        confirmButtonText: 'Confirmar Exclusão', 
+        confirmButtonColor: 'warn'
       }
     });
 
@@ -201,14 +188,12 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     });
   }
 
-  // 5. Nova função para alterar o status
   changeProjectStatus(project: Project, newStatus: Project['status'], event: MouseEvent,): void { 
 
     if (project.status === newStatus) {
       return;
     }
 
-    // 1. Abrir o modal de confirmação
     const dialogRef = this.dialog.open(ConfirmStatus, {
       width: '450px',
       data: {
@@ -219,10 +204,7 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
       }
     });
     
-
-    // 2. Ouvir a resposta
     dialogRef.afterClosed().subscribe(result => {
-      // 3. Só continuar se o usuário confirmou (result === true)
       if (result === true) {
         const payload: Partial<Project> = { status: newStatus };
 
@@ -244,49 +226,39 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
     });
   }
 
-  /**
-   * Abre o modal de detalhes
-   */
   openProjectDetails(project: Project): void {
-    this.dialog.open(ProjectDetail, { // Nome corrigido
+    this.dialog.open(ProjectDetail, { 
       data: project, 
       width: '800px',
       maxWidth: '90vw',
     });
   }
 
-  /**
-   * Abre o modal de criação
-   */
   openCreateModal(): void {
     const dialogRef = this.dialog.open(ProjectForm, {
       width: '800px',
       maxWidth: '90vw',
-      data: null // Passa 'null' para o construtor do formulário
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Adiciona o novo projeto ao início da lista
         this.projects.update(currentProjects => [result, ...currentProjects]);
       }
     });
   }
 
-  // NOVA FUNÇÃO: Para abrir o modal em modo de edição
   openEditModal(project: Project, event: MouseEvent): void {
-    event.stopPropagation(); // Impede que o clique abra o modal de "detalhes"
+    event.stopPropagation();
 
     const dialogRef = this.dialog.open(ProjectForm, {
       width: '800px',
       maxWidth: '90vw',
-      data: project // Passa o projeto existente para o construtor do formulário
+      data: project
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // 'result' é o projeto ATUALIZADO
       if (result) {
-        // Encontra o projeto na lista e o substitui
         this.projects.update(currentProjects => 
           currentProjects.map(p => p.id === result.id ? result : p)
         );
@@ -295,19 +267,16 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
   }
 
   openProposalModal(project: Project, event: MouseEvent): void {
-    event.stopPropagation(); // Impede que o clique abra "Ver detalhes"
+    event.stopPropagation();
 
     const dialogRef = this.dialog.open(ProposalForm, {
       width: '700px',
       maxWidth: '90vw',
-      data: project // Passa o projeto para o modal
+      data: project 
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        // Opcional: Você pode desabilitar o botão "Candidatar-se"
-        // ou mudar o texto para "Proposta Enviada"
-        // Por enquanto, apenas avisamos que funcionou.
         this.snackBar.open('Sua proposta foi enviada!', 'OK', { duration: 3000 });
       }
     });
@@ -322,20 +291,15 @@ export class ProjectList implements OnInit { // 5. Implementar 'OnInit'
       data: project
     });
 
-    // 2. "Ouvir" o fechamento deste modal
     dialogRef.afterClosed().subscribe(result => {
-      // 'result' é o { updatedProject, freelancer } que retornamos
       if (result) {
-        
-        // 3. Atualizar o card do projeto na tela
         this.projects.update(currentProjects => 
           currentProjects.map(p => p.id === result.updatedProject.id ? result.updatedProject : p)
         );
 
-        // 4. Abrir o NOVO modal de "Iniciar Chat"
         this.dialog.open(ChatConfirm, {
           width: '500px',
-          data: result.freelancer // Passa o freelancer para o modal de chat
+          data: result.freelancer 
         });
       }
     });

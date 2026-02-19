@@ -1,12 +1,11 @@
 export interface User {
-  // MUDANÇA AQUI
-  id: string | number; // Trocamos 'uid' por 'id'
+
+  id: string | number; 
   
   email: string;
   nome: string;
   tipo: 'freelancer' | 'empresa';
   
-  // ... (resto da interface não muda)
   fotoUrl?: string;
   bio?: string;
   localizacao?: string;

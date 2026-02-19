@@ -1,7 +1,4 @@
-/*
-	Installed from https://ui.angular-material.dev/api/registry/
-	Update this file using `@ngm-dev/cli update free-multi-column/full-width-three-column`
-*/
+
 
 @use '@angular/material' as mat;
 
@@ -22,7 +19,7 @@
 
   .mat-icon {
     color: var(--mat-sys-primary) !important;
-    font-variation-settings: 'FILL' 1; // Faz o ícone ficar preenchido
+    font-variation-settings: 'FILL' 1;
   }
 }
 

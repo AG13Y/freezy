@@ -1,50 +1,6 @@
 {
   "projects": [
     {
-      "id": "proj_1",
-      "titulo": "Desenvolvimento do App Freezy",
-      "descricao": "Na verdade o Orçamento está sendo a minha sanidade mental",
-      "empresaId": "emp_abc",
-      "freelancerId": null,
-      "status": "Aberto",
-      "orcamento": 15000,
-      "dataPostagem": "2025-11-10T10:00:00.000Z",
-      "habilidadesNecessarias": [
-        "Angular",
-        "Firebase",
-        "TypeScript"
-      ],
-      "prazoFinal": "2025-11-17T03:00:00.000Z"
-    },
-    {
-      "id": "f515",
-      "titulo": "Criar app de agua",
-      "descricao": "construir um app de agua afsddsa",
-      "orcamento": 5000,
-      "habilidadesNecessarias": [
-        "Angular"
-      ],
-      "empresaId": "uid_2q6718u",
-      "status": "Aberto",
-      "dataPostagem": "2025-11-12T11:47:01.815Z",
-      "freelancerId": null,
-      "prazoFinal": "2025-11-12T03:00:00.000Z"
-    },
-    {
-      "id": "87f1",
-      "titulo": "WaterFall",
-      "descricao": "dfjkbfjkbdjbfjksdbkjfbdsjkfbsjkdbfjkds",
-      "orcamento": 5000,
-      "habilidadesNecessarias": [
-        "Angular"
-      ],
-      "prazoFinal": "2025-12-17T03:00:00.000Z",
-      "empresaId": "uid_2q6718u",
-      "status": "Aberto",
-      "dataPostagem": "2025-11-12T22:50:55.409Z",
-      "freelancerId": null
-    },
-    {
       "id": "5234",
       "titulo": "Dolly revoluçãooo",
       "descricao": "314234134545243525425454",
@@ -54,9 +10,9 @@
       ],
       "prazoFinal": "2025-11-20T03:00:00.000Z",
       "empresaId": "d45f",
-      "status": "Concluído",
+      "status": "Aberto",
       "dataPostagem": "2025-11-13T15:00:59.569Z",
-      "freelancerId": "cebb"
+      "freelancerId": "1d84"
     },
     {
       "id": "0bbc",
@@ -68,7 +24,7 @@
       ],
       "prazoFinal": "2025-11-18T03:00:00.000Z",
       "empresaId": "d45f",
-      "status": "Concluído",
+      "status": "Cancelado",
       "dataPostagem": "2025-11-17T02:22:23.825Z",
       "freelancerId": "cebb"
     },
@@ -84,8 +40,23 @@
       ],
       "prazoFinal": "2025-11-22T03:00:00.000Z",
       "empresaId": "da0f",
-      "status": "Aberto",
-      "dataPostagem": "2025-11-17T13:38:51.531Z"
+      "status": "Em Andamento",
+      "dataPostagem": "2025-11-17T13:38:51.531Z",
+      "freelancerId": "4a9c"
+    },
+    {
+      "id": "792d",
+      "titulo": "Projeto",
+      "descricao": "dgsgsgsdsgsssfgffgfvn",
+      "orcamento": 5000,
+      "habilidadesNecessarias": [
+        "Angular"
+      ],
+      "prazoFinal": "2025-11-20T03:00:00.000Z",
+      "empresaId": "d45f",
+      "status": "Concluído",
+      "dataPostagem": "2025-11-18T22:51:20.176Z",
+      "freelancerId": "bd38"
     }
   ],
   "users": [
@@ -205,6 +176,39 @@
       "confirmPassword": "12345678",
       "terms": true,
       "uid": "uid_cc369d2"
+    },
+    {
+      "id": "83b2",
+      "nome": "vinicius",
+      "tipo": "freelancer",
+      "fotoUrl": "icon-user.png",
+      "email": "vinicius@gmail.com",
+      "password": "ss203809",
+      "confirmPassword": "ss203809",
+      "terms": true,
+      "uid": "uid_u3ajgla"
+    },
+    {
+      "id": "b2bd",
+      "nome": "Pedro",
+      "tipo": "freelancer",
+      "fotoUrl": "icon-user.png",
+      "email": "pedro.xavier2009@gmail.com",
+      "password": "123456789",
+      "confirmPassword": "123456789",
+      "terms": true,
+      "uid": "uid_p8jx1xe"
+    },
+    {
+      "id": "bd38",
+      "nome": "Alex Manoel",
+      "tipo": "freelancer",
+      "fotoUrl": "icon-user.png",
+      "email": "alex@gmail.com",
+      "password": "1234567890",
+      "confirmPassword": "1234567890",
+      "terms": true,
+      "uid": "uid_ce19fik"
     }
   ],
   "proposals": [
@@ -255,7 +259,7 @@
       "mensagem": "fdsfsdfsdgsfgsgdsfgsgf",
       "valorProposto": 5000,
       "prazoEstimadoDias": 43,
-      "status": "Pendente",
+      "status": "Aprovada",
       "dataEnvio": "2025-11-14T14:27:13.295Z",
       "attachedDocuments": [
         {
@@ -315,9 +319,71 @@
       "mensagem": "Consigo finalizar o projeto antes de prazo, por um preço um pouco maior",
       "valorProposto": 22000,
       "prazoEstimadoDias": 4,
-      "status": "Pendente",
+      "status": "Aprovada",
       "dataEnvio": "2025-11-17T13:41:53.804Z",
       "attachedDocuments": []
+    },
+    {
+      "id": "2dc2",
+      "projetoId": "proj_1",
+      "freelancerId": "b2bd",
+      "mensagem": "sou um homem demorado",
+      "valorProposto": 1000000,
+      "prazoEstimadoDias": 900,
+      "status": "Pendente",
+      "dataEnvio": "2025-11-18T22:50:36.877Z",
+      "attachedDocuments": []
+    },
+    {
+      "id": "dadf",
+      "projetoId": "proj_1",
+      "freelancerId": "bd38",
+      "mensagem": "mensagem mensagem mensagem mensagem mensagem mensagem mensagem mensagem mensagem ",
+      "valorProposto": 2300,
+      "prazoEstimadoDias": 2,
+      "status": "Pendente",
+      "dataEnvio": "2025-11-18T23:08:40.789Z",
+      "attachedDocuments": []
+    },
+    {
+      "id": "ff47",
+      "projetoId": "proj_1",
+      "freelancerId": "bd38",
+      "mensagem": "isjoiasdjoajoaisoaisjdoais",
+      "valorProposto": 3500,
+      "prazoEstimadoDias": 4,
+      "status": "Pendente",
+      "dataEnvio": "2025-11-18T23:09:29.574Z",
+      "attachedDocuments": [
+        {
+          "id": "d8aa",
+          "userId": "bd38",
+          "fileName": "Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+          "fileType": "image/png",
+          "downloadUrl": "http://fake-storage.com/user_documents/bd38/Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+          "uploadedAt": "2025-11-18T23:09:11.055Z"
+        }
+      ]
+    },
+    {
+      "id": "d4b4",
+      "projetoId": "792d",
+      "freelancerId": "bd38",
+      "mensagem": "asdasdadasdasdasdasdads",
+      "valorProposto": 3400,
+      "prazoEstimadoDias": 2,
+      "status": "Aprovada",
+      "dataEnvio": "2025-11-18T23:12:03.008Z",
+      "attachedDocuments": [
+        {
+          "id": "d8aa",
+          "userId": "bd38",
+          "fileName": "Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+          "fileType": "image/png",
+          "downloadUrl": "http://fake-storage.com/user_documents/bd38/Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+          "uploadedAt": "2025-11-18T23:09:11.055Z"
+        }
+      ]
     }
   ],
   "chats": [
@@ -368,6 +434,30 @@
         "d45f"
       ],
       "messages": []
+    },
+    {
+      "id": "f021",
+      "participantIds": [
+        "83b2",
+        "dc1c"
+      ],
+      "messages": []
+    },
+    {
+      "id": "f6cb",
+      "participantIds": [
+        "d45f",
+        "bd38"
+      ],
+      "messages": []
+    },
+    {
+      "id": "c6b1",
+      "participantIds": [
+        "d45f",
+        "83b2"
+      ],
+      "messages": []
     }
   ],
   "documents": [
@@ -410,6 +500,22 @@
       "fileType": "application/pdf",
       "downloadUrl": "http://fake-storage.com/user_documents/1d84/Certificado Objeto Python.pdf",
       "uploadedAt": "2025-11-17T13:44:01.215Z"
+    },
+    {
+      "id": "d8aa",
+      "userId": "bd38",
+      "fileName": "Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+      "fileType": "image/png",
+      "downloadUrl": "http://fake-storage.com/user_documents/bd38/Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.png",
+      "uploadedAt": "2025-11-18T23:09:11.055Z"
+    },
+    {
+      "id": "fcc8",
+      "userId": "d45f",
+      "fileName": "Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.pdf",
+      "fileType": "application/pdf",
+      "downloadUrl": "http://fake-storage.com/user_documents/d45f/Cream and Green Modern Simple Scan Here to Payment QR Code A4 Document.pdf",
+      "uploadedAt": "2025-11-19T00:03:03.416Z"
     }
   ],
   "reviews": [
@@ -467,6 +573,17 @@
       "reviewerType": "empresa",
       "revieweeId": "cebb",
       "revieweeType": "freelancer"
+    },
+    {
+      "id": "9535",
+      "projectId": "792d",
+      "rating": 5,
+      "comment": "sdasdasdasdasd",
+      "timestamp": "2025-11-18T23:13:57.045Z",
+      "reviewerId": "bd38",
+      "reviewerType": "freelancer",
+      "revieweeId": "d45f",
+      "revieweeType": "empresa"
     }
   ],
   "meetings": [

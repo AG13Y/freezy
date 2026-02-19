@@ -1,7 +1,4 @@
-/*
-	Installed from https://ui.angular-material.dev/api/registry/
-	Update this file using `@ngm-dev/cli update free-multi-column/full-width-three-column`
-*/
+
 
 import { Component, computed, inject, input } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -90,19 +87,16 @@ export class FullWidthThreeColumnComponent {
   readonly cx = cx;
   readonly isLoggedIn = this.authService.isLoggedIn;
 
-  // --- ESTA É A MUDANÇA ---
   readonly user = computed(() => {
     const currentUser = this.authService.currentUser();
     
     if (currentUser) {
-      // Usuário está logado
       return {
-        name: currentUser.nome, // <-- MUDANÇA: de email para nome
+        name: currentUser.nome, 
         email: 'Clique para sair',
-        imageUrl: currentUser.fotoUrl || 'icon-user.png', // <-- MUDANÇA: usa a foto do usuário
+        imageUrl: currentUser.fotoUrl || 'icon-user.png', 
       };
     } else {
-      // Usuário deslogado (estado padrão)
       return {
         name: 'Entre',
         email: 'Ou cadastre',
@@ -124,7 +118,7 @@ export class FullWidthThreeColumnComponent {
       id: 'dashboard',
       icon: 'home',
       routerLink: './dashboard', 
-      isActive: true, // <-- MUDANÇA AQUI
+      isActive: true, 
     },
     {
       label: 'Time',
@@ -138,7 +132,7 @@ export class FullWidthThreeColumnComponent {
       id: 'projects',
       icon: 'folder',
       routerLink: './projects', 
-      isActive: false, // <-- MUDANÇA AQUI
+      isActive: false, 
     },
     {
       label: 'Calendário',
@@ -178,7 +172,6 @@ export class FullWidthThreeColumnComponent {
     this.authService.logout();
   }
   
-  // 7. Nova função para abrir o modal de perfil
   openProfileModal(): void {
     this.dialog.open(ProfileForm, {
       width: '600px',

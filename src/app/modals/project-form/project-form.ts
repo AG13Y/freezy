@@ -10,9 +10,6 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { Proposal } from '../../interface/proposal.model';
-import { ProposalService } from '../../services/proposal.service';
-import { ProposalForm } from '../proposal-form/proposal-form';
 
 @Component({
   selector: 'app-project-form',
@@ -37,7 +34,6 @@ export class ProjectForm implements OnInit {
   private snackBar = inject(MatSnackBar);
 
   public projectForm!: FormGroup;
-  // Este era o erro de timing que corrigimos:
   private currentUser = this.authService.currentUser(); 
   public minDate = new Date();
 
@@ -49,7 +45,7 @@ export class ProjectForm implements OnInit {
     if (data) {
       this.isEditMode = true;
       this.modalTitle = 'Editar Projeto';
-      this.existingProjectId = data.id; // 'id' era obrigatório no modelo
+      this.existingProjectId = data.id;
     }
   }
 
@@ -78,7 +74,6 @@ export class ProjectForm implements OnInit {
       return;
     }
 
-    // A lógica de 'currentUser' aqui estava lendo a propriedade da classe
     if (!this.currentUser) { 
       this.snackBar.open('Erro: Você precisa estar logado.', 'Fechar', { duration: 3000 });
       return;
@@ -96,7 +91,6 @@ export class ProjectForm implements OnInit {
 
 
     if (this.isEditMode && this.existingProjectId) {
-      // --- MODO UPDATE ---
       this.projectService.updateProject(this.existingProjectId, projectPayload).subscribe({
         next: (updatedProject) => {
           this.snackBar.open('Projeto atualizado com sucesso!', 'OK', { duration: 3000 });
@@ -107,14 +101,14 @@ export class ProjectForm implements OnInit {
         }
       });
     } else {
-      // --- MODO CREATE (Com o "cast" que queríamos remover) ---
+   
       const newProjectData: Omit<Project, 'id'> = {
         ...projectPayload,
-        empresaId: this.currentUser.id, // Lendo da propriedade
+        empresaId: this.currentUser.id, 
         status: 'Aberto',
         dataPostagem: new Date(),
         
-      } as Omit<Project, 'id'>; // <-- Este é o "cast"
+      } as Omit<Project, 'id'>; 
 
       this.projectService.addProject(newProjectData).subscribe({
         next: (createdProject) => {

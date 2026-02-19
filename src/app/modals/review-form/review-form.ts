@@ -43,7 +43,7 @@ export class ReviewForm implements OnInit {
   
 
   public reviewForm!: FormGroup;
-  public ratingOptions = [1, 2, 3, 4, 5]; // Opções de nota
+  public ratingOptions = [1, 2, 3, 4, 5];
 
 
   ngOnInit(): void {
@@ -62,7 +62,6 @@ export class ReviewForm implements OnInit {
     }
     const currentUser = this.authService.currentUser();
 
-    // 2. Verificação de segurança
     if (!currentUser) {
       this.snackBar.open('Erro: Usuário não autenticado.', 'Fechar', { duration: 3000 });
       return;
@@ -84,7 +83,7 @@ export class ReviewForm implements OnInit {
     this.reviewService.addReview(newReview).subscribe({
       next: (review) => {
         this.snackBar.open('Avaliação enviada com sucesso!', 'OK', { duration: 3000 });
-        this.dialogRef.close(true); // Retorna a avaliação criada
+        this.dialogRef.close(true);
       },
       error: (err) => {
         console.error('Erro ao enviar avaliação:', err);
