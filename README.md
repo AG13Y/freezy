@@ -1,63 +1,130 @@
-# FreeLancer
+# 🚀 FreeLancer - Sistema de Gestão para Profissionais Independentes
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+O **FreeLancer** é uma plataforma moderna e responsiva desenvolvida para auxiliar freelancers e equipes no gerenciamento completo de seu fluxo de trabalho.
 
-## Development server
+O projeto simula um ecossistema real de gestão, incluindo desde o controle de projetos e documentos até a visualização de métricas em um dashboard dinâmico.
 
-To start a local development server, run:
+> ⚙️ Este projeto foi gerado com **Angular CLI versão 20.3.6**.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+O projeto utiliza o que há de mais recente no ecossistema de desenvolvimento web:
+
+### 🎨 Frontend
+- **Angular 20** (última versão)
+  - Componentes standalone
+  - Roteamento avançado
+
+### 🎯 Estilização
+- **Tailwind CSS 4**
+- Integração com **SASS/SCSS**
+
+### 🧩 UI Components
+- **Angular Material**
+  - Componentes acessíveis e consistentes
+
+### 🔗 Backend (Simulação)
+- **JSON Server**
+  - Persistência de dados
+  - Simulação de API RESTful
+
+### 🔐 Segurança
+- **Guards**
+  - `authGuard`
+  - `publicGuard`
+
+### ⚙️ Utilitários
+- **RxJS** (Programação Reativa)
+- **clsx**
+- **tailwind-merge**
+
+---
+
+## ✨ Funcionalidades Principais
+
+A aplicação está estruturada para oferecer uma experiência completa de usuário:
+
+- 🔑 **Autenticação**
+  - Login
+  - Registro de usuários
+  - Rotas protegidas
+
+- 📊 **Dashboard**
+  - Visualização rápida do status do negócio
+
+- 📁 **Gestão de Projetos**
+  - Listagem
+  - Controle detalhado de projetos ativos
+
+- 📅 **Calendário**
+  - Visualização de prazos
+  - Agendamentos importantes
+
+- 📂 **Gestão de Documentos**
+  - Armazenamento
+  - Organização de arquivos do projeto
+
+- 👥 **Equipe e Colaboração**
+  - Gestão de membros da equipe
+
+- 📈 **Relatórios**
+  - Métricas
+  - Análises de desempenho
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 📋 Pré-requisitos
+
+- Node.js instalado
+- Angular CLI instalado globalmente:
 
 ```bash
-ng serve
+npm install -g @angular/cli
 ```
+
+---
+
+### 🔧 Passo a passo
+
+#### 1️⃣ Clone o repositório
+
+```bash
+git clone [url-do-seu-repositorio]
+cd free-lancer
+```
+
+#### 2️⃣ Instale as dependências
+
+```bash
+npm install
+```
+
+#### 3️⃣ Inicie o servidor de mock (API)
 
 ```bash
 npm run json-server
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Isso iniciará o banco de dados simulado localizado em:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+db/db.json
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+#### 4️⃣ Inicie a aplicação Angular
 
 ```bash
-ng generate --help
+ng serve
 ```
 
-## Building
+Acesse no navegador:
 
-To build the project run:
-
-```bash
-ng build
+```
+http://localhost:4200/
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+A aplicação recarregará automaticamente sempre que você modificar qualquer arquivo.
